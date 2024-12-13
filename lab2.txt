@@ -1,131 +1,15 @@
-Lab Program 3
-Create a Radio button and Submit button (on clicking submit button data in the text box abd radio button must be cleared)
-
-MainActivity.java
-
-package com.example.quiz;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-public class MainActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        RadioButton radiobutton1=findViewById(R.id.Option1);
-        RadioButton radiobutton2=findViewById(R.id.Option2);
-        RadioButton radiobutton3=findViewById(R.id.Option3);
-        RadioButton radiobutton4=findViewById(R.id.Option4);
-
-        Button button = findViewById(R.id.submit);
-        button.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view) {
-                String selectedAns = "no Selection";
-                if (radiobutton1.isChecked()){
-                    selectedAns=radiobutton1.getText().toString();
-                } else if (radiobutton2.isChecked()) {
-                    selectedAns = radiobutton2.getText().toString();
-                } else if (radiobutton3.isChecked()) {
-                    selectedAns = radiobutton3.getText().toString();
-                } else if (radiobutton4.isChecked()) {
-                    selectedAns = radiobutton4.getText().toString();
-                }
-                if(selectedAns.equals("javascript object notation")){
-                    Toast.makeText(MainActivity.this,"Correct Answer", Toast.LENGTH_SHORT).show();
-                } else
-                    Toast.makeText(MainActivity.this,"Wrong Answer", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }
-}
-
-
-
-
-activity_main.xml
-
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    tools:context=".MainActivity">
-    <LinearLayout
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="full form of json"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            <RadioButton
-                android:id="@+id/Option1"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:checked="true"
-                android:textSize="20sp"
-                android:text = "javascript object notation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <RadioButton
-                android:id="@+id/Option2"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:textSize="20sp"
-                android:text="javascript objected notation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <RadioButton
-                android:id="@+id/Option3"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:textSize="20sp"
-                android:text="javascript orient notation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <RadioButton
-                android:id="@+id/Option4"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:textSize="20sp"
-                android:text="javascript oriented notation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RadioGroup>
-        <Button
-            android:id="@+id/submit"
-            android:layout_gravity="center"
-            android:text="Submit"
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-</LinearLayout>
-
-
-Output:
-
+import pandas as pd import numpy as np 
+ 
+#to read the data in the csv file  data = pd.read_csv("C:/Users/ISE14/Documents/CSV_AIML/P2Data.csv") print(data) 
+ 
+#making an array of all the attributes  d = np.array(data)[:,:-1] print("The attributes are: \n",d) 
+ 
+#segragating the target that has positive and negative examples  target = np.array(data)[:,-1] print("The target is: ",target) 
+ 
+#training function to implement find-s algorithm def train(c,t):  
+    for i, val in enumerate(t): 
+        if val == "Yes": 
+            specific_hypothesis = c[i].copy()             break      for i, val in enumerate(c):          if t[i] == "Yes":              for x in range(len(specific_hypothesis)):                  if val[x] != specific_hypothesis[x]:                      specific_hypothesis[x] = "?"                  else:                     pass 
+    return specific_hypothesis 
+ 
+#obtaining the final hypothesis print("The final hypothesis is:",train(d,target)) 
