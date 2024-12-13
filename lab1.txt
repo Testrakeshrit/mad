@@ -1,84 +1,39 @@
-Lab Program 4
-Develop an android app to create a text and a button. Click on the button, it should display the message “We are 5th semester Students ready to attend classes.
+import matplotlib.pyplot as plt  import numpy as np  from math import sqrt 
+ 
+# Calculate root mean squared error def rmse_metric(actual, predicted): 
+    sum_error = 0.0     for i in range(len(actual)): 
+        prediction_error = predicted[i] - actual[i]         sum_error += (prediction_error**2)     mean_error = sum_error / float(len(actual))     return sqrt(mean_error) 
+     
+# Evaluate regression algorithm on training dataset' def evaluate_algorithm(dataset, algorithm): 
+    test_set=[]     for row in dataset: 
+        row_copy = list(row)         row_copy[-1] = None         test_set.append(row_copy)     predicted = algorithm(dataset, test_set)     print(predicted) 
+    actual = [row[-1] for row in dataset]     rmse = rmse_metric(actual, predicted)     return rmse 
+     
+# Calculate the mean value of a list of numbers def mean(values): 
+    return sum(values) / float(len(values)) 
+ 
+ 
 
-MainActivity.java
-
-package com.example.hello;
-
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-public class MainActivity extends AppCompatActivity {
-    TextView TextBoxId;
-    Button Click;
-    @SuppressLint("MissingInflatedId")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        TextBoxId = (TextView) findViewById(R.id.textbox);
-        Click = (Button) findViewById(R.id.button);
-
-        Click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextBoxId.setText("We are 5th semester students ready to attend classes:D");
-            }
-        });
-    }
-}
-
-activity_main.xml
-
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#9FC5A2"
-        android:text="Click on the Button"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.264" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#73B7BA"
-        android:text="Click here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textbox"
-        app:layout_constraintVertical_bias="0.226" />
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
-Output:
-
-
+     
+# Calculate covariance between x and y def covariance(x, mean_x, y, mean_y): 
+    covar = 0.0     for i in range(len(x)):         covar += (x[i] - mean_x) * (y[i] - mean_y)     return covar/float(len(x)) 
+     
+# Calculate the variance of a list of numbers def variance(values, mean): 
+    return (sum([(x-mean)**2 for x in values]))/float(len(values)) 
+     
+# Calculate coefficients def coefficients(dataset): 
+    x = [row[0] for row in dataset]     y = [row[1] for row in dataset]     x_mean, y_mean = mean (x), mean(y)     b1 = covariance(x, x_mean, y, y_mean) / variance(x, x_mean)     b0 = y_mean - b1 * x_mean     return [b0, b1] 
+ 
+# Simple linear regression algorithm def simple_linear_regression(train, test): 
+    predictions = []     b0, b1 = coefficients(train)     for row in test: 
+        yhat = b0 + b1 * row[0]         predictions.append(yhat)     return predictions 
+ 
+# Test simple linear regression dataset = [[1, 1], [2, 3], [4, 3], [3, 2], [5, 5]] 
+x = [row[0] for row in dataset] 
+y = [row[1] for row in dataset] mean_x, mean_y = mean(x), mean (y)
+ var_x, var_y = variance(x, mean_x), variance(y, mean_y) print('x stats: Mean = %.3f Variance = %.3f' % (mean_x, var_x)) print('y stats: Mean = %.3f Variance = %.3f' % (mean_y, var_y)) covar = covariance(x, mean_x, y, mean_y)
+ print('Covariance : %.3f' % (covar)) 
+rmse = evaluate_algorithm(dataset, simple_linear_regression)
+ print('RMSE: %.3f' % (rmse)) 
+ 
+# calculate coefficients b0, b1 = coefficients(dataset) print('Coefficients: B0 = %.3f, B1 = %.3f' % (b0, b1)) 
