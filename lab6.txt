@@ -1,23 +1,4 @@
-Program – 6 
-Develop an application for fragmentation.  
-Create two Fragments and load them on the click of Button’s. Display two Button’s and a FrameLayout in the Activity and perform setOnClickListener event on both Button’s. On the click of First Button it replace the First Fragment and on click of Second Button it replace the Second Fragment with the layout (FrameLayout). Both Fragment’s display a TextView and a Button and onclick of Button we display the name of the Fragment with the help of Toast. 
-Layout Design: 
-  
-Layout Steps: 
-Requirements of the application – 4 Buttons, Frame Layout and 2 TextViews 
-Steps –  	 
-File – 1 (activity_main.xml) 
-1)	Drag and drop a button and set its position. Change its ID to mainFragment1Button and change its text to Fragment 1 Button. 
-2)	Drag and drop another button from the menu and set its position. Change its ID to mainFragment2Button and change its text to Fragment 2 Button. 
-3)	Drag a FrameLayout from the widget menu and Change its ID to mainFrameLayout. 
-File – 2 (activity_fragment_one.xml) 
-4)	Drag and drop a TextView and set its position. Change its ID to 
-FragmentOneTextView and change its text to Fragment One 
-5)	Drag and drop a button and set its position. Change its ID to FragmentOneButton and change its text to Click Me. 
-File – 3 (activity_fragment_two.xml) 
-6)	Drag and drop a TextView from the palette and set its position. Change its id to FragmentTwoTextView and change its text to "Fragment Two". 
-7)	Drag and drop a button and set its position. Change its id to FragmentTwoButton and change its text to "Click Me". 
-Java Code: 
+Code: 
 File – 1 (MainActivity.java) 
 package com.example.a6myapplication; 
  
